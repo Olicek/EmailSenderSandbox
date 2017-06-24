@@ -5,3 +5,4 @@
 /Vagrantfile
 /temp/
 /composer.lock
+src/config.local.neon

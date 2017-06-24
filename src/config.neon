@@ -1,0 +1,28 @@
+parameters:
+  application:
+    name: Cron mailer
+    version: v0.1
+  database:
+    driver: pdo
+    dsn: 'mysql:host=localhost;dbname=cron_mailer;charset=utf8'
+    username: root
+    password: root
+  mailerSettings:
+    charset: 'UTF-8'
+    useSMTP: on
+    host: 'smtp.server'
+    smtpAuth: on
+    username: 'email@email.cz'
+    password: '***'
+    smtpSecure: 'tls'
+    port: 421
+
+services:
+  - Dibi\Connection(%database%)
+  - Oli\EmailSender\Persistence\Adapters\DibiAdapter
+  - Oli\EmailSender\Cron\Commands\SendEmailsCommand
+  - Symfony\Component\Console\Application(%application%)
+  - Oli\EmailSender\Persistence\PersistEmail
+  - Oli\EmailSender\Cron\Adapters\PHPMailer
+  - Oli\EmailSender\Cron\Mailer
+  - Oli\EmailSender\Cron\Config\MailerSettings(%mailerSettings%)

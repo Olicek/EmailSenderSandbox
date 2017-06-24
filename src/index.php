@@ -2,20 +2,19 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$sender = new \Oli\EmailSender\Persistence\Entities\Person('Petr Olišar', 'petr.olisar@gmail.com');
-$reciver = new \Oli\EmailSender\Persistence\Entities\Person('František Vomáčka', 'vomacka@email.cz');
+$receiver = new \Oli\EmailSender\Persistence\Entities\Person('Petr Olišar', 'petr.olisar@gmail.com');
+$sender = new \Oli\EmailSender\Persistence\Entities\Person('František Vomáčka', 'vomacka@email.cz');
 
-$email = new \Oli\EmailSender\Persistence\Entities\Email($sender, $reciver, 'Ahoj Františku, jak se máš?', 'Testovací e-mail');
+$email = new \Oli\EmailSender\Persistence\Entities\Email($sender, $receiver, 'Ahoj Františku, jak se máš?', 'Testovací e-mail');
 
-$options = [
-  'driver'   => 'mysql',
-  'host'     => 'localhost',
-  'username' => 'root',
-  'password' => '***',
-  'database' => 'table',
-];
-$connection = new \Dibi\Connection($options);
+$loader = new Nette\DI\ContainerLoader(__DIR__ . '/../temp');
+$class = $loader->load(function(\Nette\DI\Compiler $compiler) {
+  $compiler->loadConfig(__DIR__ . '/config.neon');
+});
+/** @var \Nette\DI\Container $container */
+$container = new $class;
 
-$dibiAdapter = new \Oli\EmailSender\Persistence\Adapters\DibiAdapter($connection);
+/** @var \Oli\EmailSender\Persistence\PersistEmail $persistEmail */
+$persistEmail = $container->getByType(\Oli\EmailSender\Persistence\IPersistEmail::class);
 
-$dibiAdapter->insertEmail($email);
+$persistEmail->send($email);

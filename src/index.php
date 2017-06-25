@@ -10,6 +10,7 @@ $email = new \Oli\EmailSender\Persistence\Entities\Email($sender, $receiver, 'Ah
 $loader = new Nette\DI\ContainerLoader(__DIR__ . '/../temp');
 $class = $loader->load(function(\Nette\DI\Compiler $compiler) {
   $compiler->loadConfig(__DIR__ . '/config.neon');
+  $compiler->loadConfig(__DIR__ . '/config.local.neon');
 });
 /** @var \Nette\DI\Container $container */
 $container = new $class;

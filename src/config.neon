@@ -9,13 +9,7 @@ parameters:
     password: root
   mailerSettings:
     charset: 'UTF-8'
-    useSMTP: on
-    host: 'smtp.server'
-    smtpAuth: on
-    username: 'email@email.cz'
-    password: '***'
-    smtpSecure: 'tls'
-    port: 421
+    useSMTP: off
 
 services:
   - Dibi\Connection(%database%)

@@ -16,3 +16,13 @@ parameters:
     port: 421
 
 ```
+
+Installation database:
+```
+./vendor/bin/cron emails:install -c ./src/config.local.neon 
+```
+
+Run sender command:
+```
+./vendor/bin/cron emails:send -c ./src/config.local.neon 
+```

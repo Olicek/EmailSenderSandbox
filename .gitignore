@@ -1,7 +1,6 @@
 /vendor/
 /.idea/
 /.vagrant/
-/ansible/
 /temp/
 /composer.lock
 src/config.local.neon

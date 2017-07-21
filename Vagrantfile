@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   # nastaveni site
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.44.10"
 
   # fix chyby "stdin: is not a tty"
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
@@ -20,14 +20,11 @@ Vagrant.configure("2") do |config|
     # Nazev virtualni masiny
     vb.name = "EmailSenderSandbox"
 
-    # Display the VirtualBox GUI when booting the machine
-    #vb.gui = true
-
     # pocet CPU (vlaken)
     vb.cpus = 1
 
     # Velikost operacni pameti
-    vb.memory = "1024"
+    vb.memory = "512"
   end
 
   # Spusteni skriptu pred Ansiblem
@@ -40,7 +37,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible_local" do |ansible|
     ansible.galaxy_role_file = "./ansible/requirements.yml"
     ansible.galaxy_roles_path = "./temp/ansible/"
-    ansible.playbook = "./ansible/sm-devel-ecommerce.yml"
+    ansible.playbook = "./ansible/playbook.yml"
   end
 
 end

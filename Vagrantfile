@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   # nastaveni site
-  config.vm.network "private_network", ip: "192.168.44.10"
+  config.vm.network "private_network", ip: "192.168.44.20"
 
   # fix chyby "stdin: is not a tty"
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
 
     # Velikost operacni pameti
-    vb.memory = "512"
+    vb.memory = "1024"
   end
 
   # Spusteni skriptu pred Ansiblem

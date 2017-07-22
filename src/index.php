@@ -19,3 +19,6 @@ $container = new $class;
 $persistEmail = $container->getByType(\Oli\EmailSender\Persistence\IPersistEmail::class);
 
 $persistEmail->send($email);
+
+?>
+<h1>Email odeslán</h1>
